@@ -27,7 +27,18 @@ export default function Index() {
     const [turma, setTurma] = useState('');
     const [curso, setCurso] = useState('');
     const [idAlterando, setIdAlterando] = useState(0);
+
     let loading = useRef(null);
+
+    const atualizar = async () => {
+        loading.current.continuousStart();
+
+        const alunos = await api.listar(1);
+        setAlunos(alunos)
+
+        loading.current.complete();
+    }
+
     
     async function listar() {
         loading.current.continuousStart();
@@ -38,6 +49,12 @@ export default function Index() {
     
     async function inserir() {
         loading.current.continuousStart();
+
+        if ( chamada <= 0 ) 
+            return toast.error( 'Chamada negativa não existe!' )
+
+        if (nome === '' || chamada === '' || turma === '' || curso === '')
+            return toast.error( "Todos os campos precisam ser preenchido" );
 
         if(idAlterando == 0) {
             let r = await api.inserir(nome, chamada, turma, curso);
