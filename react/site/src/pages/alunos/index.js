@@ -69,7 +69,7 @@ export default function Index() {
             if (r.erro)
                 toast.dark(r.erro);
             else 
-                toast.dark('Aluno alterado!')
+                toast.dark('Aluno alterado!!')
         }
         
         limparCampos();
