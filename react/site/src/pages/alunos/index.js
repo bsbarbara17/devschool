@@ -30,15 +30,7 @@ export default function Index() {
 
     let loading = useRef(null);
 
-    const atualizar = async () => {
-        loading.current.continuousStart();
-
-        const alunos = await api.listar(1);
-        setAlunos(alunos)
-
-        loading.current.complete();
-    }
-
+    
     
     async function listar() {
         loading.current.continuousStart();
@@ -56,7 +48,7 @@ export default function Index() {
         if (nome === '' || chamada === '' || turma === '' || curso === '')
             return toast.error( "Todos os campos precisam ser preenchido" );
 
-        if(idAlterando == 0) {
+        if(idAlterando === 0) {
             let r = await api.inserir(nome, chamada, turma, curso);
                 
             if (r.erro)
@@ -138,7 +130,7 @@ export default function Index() {
                         
                         <div class="text-new-student">
                             <div class="bar-new-student"></div>
-                            <div class="text-new-student"> {idAlterando == 0 ? "Novo Aluno" : "Alterando Aluno " + idAlterando}</div>
+                            <div class="text-new-student"> {idAlterando === 0 ? "Novo Aluno" : "Alterando Aluno " + idAlterando}</div>
                         </div>
 
                         <div class="input-new-student"> 
@@ -189,7 +181,7 @@ export default function Index() {
                             <tbody>
                                 {alunos.map((item, i) =>   
 
-                                    <tr className={i % 2 == 0 ? "linha-alternada" : ""}>
+                                    <tr className={i % 2 === 0 ? "linha-alternada" : ""}>
                                         <td> {item.id_matricula} </td>
                                         <td title={item.nm_aluno}> 
                                             {item.nm_aluno != null && item.nm_aluno.length >= 22
