@@ -163,7 +163,7 @@ export default function Index() {
                                     <div class="input"> <input type="text" value={turma} onChange={e => setTurma(e.targe.value)} /> </div> 
                                 </div>
                             </div>
-                            <div class="button-create"> <button onClick={inserir}> {alt == 0 ? "Cadastrar" : "Alterar"} </button> </div>
+                            <div class="button-create"> <button onClick={inserir}> {idAlterando === 0 ? "Cadastrar" : "Alterar"} </button> </div>
                         </div>
                     </div>
 
