@@ -42,14 +42,27 @@ export default function Index() {
     async function inserir() {
         loading.current.continuousStart();
 
-        if ( chamada <= 0 ) 
-            return toast.error( 'Chamada negativa não existe!' )
+        if ( chamada < 0 ) 
+        return toast.error( 'Chamada negativa não existe!' )
 
-        if (nome === '' || chamada === '' || turma === '' || curso === '')
-            return toast.error( "Todos os campos precisam ser preenchido" );
+        if(nome === '' || chamada === '' || turma === '' || curso === '')
+            return toast.error( "Todos campos são obrigatórios!" );
+  
+        if ( nome === '' )
+            return toast.error( "O campo Nome precisa ser preenchido" );
+    
+        if ( chamada === '' )
+            return toast.error( " O campo Chamada precisa ser preenchido " );
+    
+        if ( turma === '' )
+            return toast.error( "O campo Turma precisa ser preenchido" );
+    
+        if ( curso === '' )
+            return toast.error( "O campo Curso precisa ser preenchido" );
 
-        if(idAlterando === 0) {
-            let r = await api.inserir(nome, chamada, turma, curso);
+            
+        if(idAlterando === 0) { 
+            let r = await api.inserir(nome, chamada, curso, turma);
                 
             if (r.erro)
                 toast.dark(r.erro);
@@ -137,22 +150,22 @@ export default function Index() {
                             <div class="input-left">
                                 <div class="agp-input"> 
                                     <div class="name-student"> Nome: </div>  
-                                    <div class="input"> <input type="text" value={nome} onChange={e => setNome(e.targe.value)} /> </div>  
+                                    <div class="input"> <input type="text" value={nome} onChange={e => setNome(e.target.value)} /> </div>  
                                 </div> 
                                 <div class="agp-input">
                                     <div class="number-student"> Chamada: </div>  
-                                    <div class="input"> <input type="text" value={chamada} onChange={e => setChamada(e.targe.value)} /> </div> 
+                                    <div class="input"> <input type="text" value={chamada} onChange={e => setChamada(e.target.value)} /> </div> 
                                 </div>
                             </div>
 
                             <div class="input-right">
                                 <div class="agp-input">
                                     <div class="corse-student"> Curso: </div>  
-                                    <div class="input"> <input type="text" value={curso} onChange={e => setCurso(e.targe.value)} /> </div>  
+                                    <div class="input"> <input type="text" value={curso} onChange={e => setCurso(e.target.value)} /> </div>  
                                 </div>
                                 <div class="agp-input">
                                     <div class="class-student"> Turma: </div>  
-                                    <div class="input"> <input type="text" value={turma} onChange={e => setTurma(e.targe.value)} /> </div> 
+                                    <div class="input"> <input type="text" value={turma} onChange={e => setTurma(e.target.value)} /> </div> 
                                 </div>
                             </div>
                             <div class="button-create"> <button onClick={inserir}> {idAlterando === 0 ? "Cadastrar" : "Alterar"} </button> </div>
