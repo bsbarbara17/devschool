@@ -44,9 +44,6 @@ export default function Index() {
 
         if ( chamada < 0 ) 
         return toast.error( 'Chamada negativa não existe!' )
-
-        if(nome === '' || chamada === '' || turma === '' || curso === '')
-            return toast.error( "Todos campos são obrigatórios!" );
   
         if ( nome === '' )
             return toast.error( "O campo Nome precisa ser preenchido" );
